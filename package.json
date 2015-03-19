@@ -1,0 +1,24 @@
+{
+  "name": "uploazer",
+  "version": "0.0.1",
+  "description": "Upload and resize images to S3",
+  "main": "src/app.js",
+  "dependencies": {
+    "aws-sdk": "~2.1.17"
+  },
+  "devDependencies": {
+    "gulp": "~3.8.11",
+    "gulp-babel": "~4.0.0",
+    "gulp-nodemon": "~2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BarnabyBishop/uploazer.git"
+  },
+  "author": "Barnaby Bishop",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BarnabyBishop/uploazer/issues"
+  },
+  "homepage": "https://github.com/BarnabyBishop/uploazer"
+}
