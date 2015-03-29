@@ -4,12 +4,15 @@
   "description": "Upload and resize images to S3",
   "main": "src/app.js",
   "dependencies": {
-    "aws-sdk": "~2.1.17"
+    "aws-sdk": "~2.1.17",
+    "babel": "^4.7.16"
   },
   "devDependencies": {
-    "gulp": "~3.8.11",
-    "gulp-babel": "~4.0.0",
-    "gulp-nodemon": "~2.0.0"
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-babel": "^4.0.0",
+    "gulp-jshint": "^1.9.4",
+    "gulp-nodemon": "^2.0.2"
   },
   "repository": {
     "type": "git",

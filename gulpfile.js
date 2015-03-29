@@ -1,23 +1,26 @@
 var gulp = require('gulp');
 var nodemon = require('gulp-nodemon');
-var babel = require("gulp-babel");
+var babel = require("gulp-babel")
+var del = require('del');
 
-gulp.task('babel', function () {
-  return gulp.src('src/app.js')
-	.pipe(babel())
-	.pipe(gulp.dest('dist'));
+/*
+gulp.task('clean', function(done) {
+  del(['dist'], done);
 });
 
 
-gulp.task('start', function() {
-	nodemon({
-		script: 'dist/app.js',
-		ext: 'js'
-	  })
-	.on('change', ['babel'])
-	.on('restart', function() {
-		return console.log('Restarted!');
-	});
+gulp.task('babel', ['clean'], function () {
+    return gulp.src('src/app.js')
+	  //.pipe(babel({ optional: 'asyncToGenerator' }))
+	  .pipe(gulp.dest('dist'));
 });
+ ['babel'], */
+gulp.task('start', function () {
+  nodemon({ script: 'src/app.js' })
+})
 
-gulp.task('default', ['babel', 'start']);
+gulp.task('watch', function() {
+	gulp.watch('src/*.js');
+})
+
+gulp.task('default', ['start', 'watch']);

@@ -1,11 +1,21 @@
-const babel = require("babel/register")({ experimental: true });
-const Amazon = require('./amazon');
+const AWS = require('aws-sdk');
+const gm = require('gm');
 
-const amazon = new Amazon('barney-photos');
-amazon.loadAllObjects();
+const s3 = new AWS.S3();
+const resizeY = 800;
 
-console.log('app: ', amazon.content.length);
-/*
+images = s3.load();
+thumbnails = s3.loadThumbnails();
+
+for (let key in images) {
+	if (!thumbnails[key]) {
+		thumb = gm.createThumbnail();
+		s3.uploadThumbnail(thumb);
+	}
+}
+
+
+
 s3.listObjects({ Bucket: 'barney-photos' }, (error, data) => {
 	if (error) {
     	console.log(error); // error is Response.error
@@ -24,5 +34,19 @@ s3.listObjects({ Bucket: 'barney-photos' }, (error, data) => {
     	});
 
   	}
+});
+
+gm('/path/to/image.jpg')
+.blur(30, 20)
+.resize(resizeX, resizeY)
+.autoOrient();
+.write(response, function (err) {
+  if (err) ...
+});
+
+/*
+var params = { Bucket: 'barney-photos', Key: 'Honeymoon/20130605_143625.jpg' };
+s3.getSignedUrl('getObject', params, function (err, url) {
+  console.log('The URL is', url);
 });
 */
