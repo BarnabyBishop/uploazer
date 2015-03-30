@@ -5,7 +5,8 @@
   "main": "src/app.js",
   "dependencies": {
     "aws-sdk": "~2.1.17",
-    "babel": "^4.7.16"
+    "babel": "^4.7.16",
+    "bluebird": "^2.9.21"
   },
   "devDependencies": {
     "del": "^1.1.1",

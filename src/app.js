@@ -1,7 +1,7 @@
 const babel = require("babel/register")({ experimental: true });
 const Amazon = require('./amazon');
 
-const amazon = new Amazon('barney-photos');
+const amazon = new Amazon('barney-photos', 'BB Android Phone 2');
 amazon.loadAllObjects();
 
 console.log('app: ', amazon.content.length);
