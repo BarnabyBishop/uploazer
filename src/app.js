@@ -1,10 +1,10 @@
 const babel = require("babel/register")({ experimental: true });
 const Amazon = require('./amazon');
 
-const amazon = new Amazon('barney-photos', 'BB Android Phone 2');
-amazon.loadAllObjects();
+const amazon = new Amazon('barney-photos', 'Honeymoon');
+//const amazon = new Amazon('barney-photos', 'BB Android Phone 2');
+amazon.checkThumbnails();
 
-console.log('app: ', amazon.content.length);
 /*
 s3.listObjects({ Bucket: 'barney-photos' }, (error, data) => {
 	if (error) {
