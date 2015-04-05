@@ -9,25 +9,28 @@ class Amazon {
   constructor(bucket, prefix) {
     this.bucket = bucket;
     this.prefix = prefix;
-    this.content = [];
+    this.content = null;
+    this.thumbnails = null;
   }
 
   async checkThumbnails() {
     // Load all objects in current bucket.
-    await this.loadAllObjects();
-    await this.loadAllObjects(null, 'Thumbnails/' + this.prefix);
+    this.content = await this.loadAllObjects();
+    this.thumbnails = await this.loadAllObjects({ prefix: 'Thumbnails/' + this.prefix });
   }
 
-  async loadAllObjects(marker, prefix) {
-    let count = await this.listObjects(marker, prefix);
+  async loadAllObjects({ marker: marker, prefix: prefix }) {
+    let objects = [];
+    objects = objects.concat(await this.listObjects({ marker: marker, prefix: prefix }));
 
     if (count == listLimit) {
-        let marker = this.content[this.content.length - 1].Key;
-        await this.loadAllObjects(marker, prefix);
+        let marker = objects[objects.length - 1].Key;
+        objects = objects.concat(await this.loadAllObjects({ marker: marker, prefix: prefix }));
     }
+    return objects;
   }
 
-  listObjects(marker, prefix) {
+  listObjects({ marker: marker, prefix: prefix }) {
     let params = { Bucket: this.bucket };
     if (marker) {
       params.Marker = marker;
@@ -36,7 +39,7 @@ class Amazon {
 
     return s3.listObjectsAsync(params).then((data) => {
       this.content = this.content.concat(data.Contents);
-      return data.Contents.length;
+      return data.Contents;
     });
   }
 }
