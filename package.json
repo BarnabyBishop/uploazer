@@ -7,7 +7,8 @@
     "aws-sdk": "~2.1.17",
     "babel": "^4.7.16",
     "bluebird": "^2.9.21",
-    "lodash": "^3.6.0"
+    "lodash": "^3.6.0",
+    "progress": "^1.1.8"
   },
   "devDependencies": {
     "del": "^1.1.1",
