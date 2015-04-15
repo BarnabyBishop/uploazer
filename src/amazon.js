@@ -4,6 +4,7 @@ const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
 const Promise = require('bluebird');
 const ProgressBar = require('progress');
+const mime = require('mime');
 
 const listLimit = 1000;
 const thumbBucket = 'Thumbnails/';
@@ -35,6 +36,8 @@ class Amazon {
 
 		if (missingFilesCount > 0) {
 			await this.uploadMissingFiles();
+			console.log('finished uploading missing');
+			return;
 		}
 
 		this.thumbnails = await this.loadAllObjects({ prefix: thumbBucket + this.prefix });
@@ -75,23 +78,24 @@ class Amazon {
 	}
 
 	async uploadMissingFiles() {
-		let loadingFile = false;
+		let paramList = [];
 		for (let file of this.missingFiles) {
 			let filename = file.name;
+			let filePath = file.path + filename;
 			let bucket = this.bucket + file.bucketAlias;
-			if (!loadingFile) {
-				loadingFile = true;
-				console.log(`Uploading ${file.path + filename} to ${file.bucketAlias + filename}`)
-				let fileBuffer = fs.readFileSync(file.path + filename);
-				var params = {Bucket: this.bucket, Key: file.bucketAlias + filename, ContentType: 'image/JPEG', Body: fileBuffer };
-				await this.putObject(params);
-			}
+				let fileBuffer = fs.readFileSync(filePath);
+				paramList.push({Bucket: this.bucket, Key: file.bucketAlias + filename, ContentType: mime.lookup(filePath), Body: fileBuffer });
 		}
+		return new Promise((resolve) => {
+			this.putObject(paramList, resolve);
+		});
 	}
 
-	putObject(params) {
+	putObject(paramList, resolve) {
+		let params = paramList[0];
 		let uploadProgress = 0;
 		let bar = new ProgressBar(':bar:percent', { total: 100, width: 20 });
+		console.log(`Uploading ${params.Key}`);
 		return s3.putObject(params)
 				.on('httpUploadProgress', function (progress) {
 					let percentage = parseInt(progress.loaded / progress.total * 100)
@@ -100,12 +104,19 @@ class Amazon {
 						bar.tick();
 					}
 				})
-				.send()
-				.then((err, data) => {
+				.send((err, data) => {
 					if (err) {
 						console.log('Error: ', err);
 					} else {
-						console.log(`Uploaded! ${file.path + filename} to ${file.bucketAlias + filename}`);
+						console.log(`Finished! ♪~ ᕕ(ᐛ)ᕗ`);
+						console.log('');
+						if (paramList.length > 1) {
+							this.putObject(paramList.slice(1), resolve);
+						}
+						else {
+							console.log('All file uploaded. ヾ(⌐■_■)ノ♪');
+							resolve();
+						}
 					}
 			  });
 	}
