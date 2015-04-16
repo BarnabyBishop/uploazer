@@ -5,6 +5,7 @@ const s3 = new AWS.S3();
 const Promise = require('bluebird');
 const ProgressBar = require('progress');
 const mime = require('mime');
+var gm = require('gm');
 
 const listLimit = 1000;
 const thumbBucket = 'Thumbnails/';
@@ -22,6 +23,7 @@ class Amazon {
 		this.thumbnails = {};
 
 		this.missingFiles = [];
+		this.missingThumbnails = [];
 
 	}
 
@@ -36,8 +38,6 @@ class Amazon {
 
 		if (missingFilesCount > 0) {
 			await this.uploadMissingFiles();
-			console.log('finished uploading missing');
-			return;
 		}
 
 		this.thumbnails = await this.loadAllObjects({ prefix: thumbBucket + this.prefix });
@@ -45,8 +45,10 @@ class Amazon {
 
 
 		// Find what thumbnails need to be uploaded
-		const missingThumbnails = this.findMissingThumbnails();
-		console.log(`${missingThumbnails.length} missing thumbnails.`);
+		this.findMissingThumbnails();
+		console.log(`${this.missingThumbnails.length} missing thumbnails.`);
+
+		this.uploadMissingThumbnails();
 	}
 
 	//=================
@@ -82,13 +84,33 @@ class Amazon {
 		for (let file of this.missingFiles) {
 			let filename = file.name;
 			let filePath = file.path + filename;
-			let bucket = this.bucket + file.bucketAlias;
-				let fileBuffer = fs.readFileSync(filePath);
-				paramList.push({Bucket: this.bucket, Key: file.bucketAlias + filename, ContentType: mime.lookup(filePath), Body: fileBuffer });
+			let fileBuffer = fs.readFileSync(filePath);
+			paramList.push({Bucket: this.bucket, Key: file.bucketAlias + filename, ContentType: mime.lookup(filePath), Body: fileBuffer });
 		}
 		return new Promise((resolve) => {
 			this.putObject(paramList, resolve);
 		});
+	}
+
+	uploadMissingThumbnails() {
+		let paramList = [];
+		for (let file of this.missingThumbnails) {
+			let filePath = this.getFilePath(file.Key);
+			let fileStream =
+				gm(filePath)
+					.resize(null, 50)
+					.autoOrient()
+					.stream();
+
+			paramList.push({Bucket: this.bucket, Key: file.Key, ContentType: 'image/jpg', Body: fileStream });
+		}
+		return new Promise((resolve) => {
+			this.putObject(paramList, resolve);
+		});
+	}
+
+	getFilePath(fileKey) {
+		return fileKey;
 	}
 
 	putObject(paramList, resolve) {
@@ -98,13 +120,13 @@ class Amazon {
 		console.log(`Uploading ${params.Key}`);
 		return s3.putObject(params)
 				.on('httpUploadProgress', function (progress) {
-					let percentage = parseInt(progress.loaded / progress.total * 100)
+					let percentage = parseInt(progress.loaded / progress.total * 100);
 					if (percentage > uploadProgress) {
 						uploadProgress = percentage;
 						bar.tick();
 					}
 				})
-				.send((err, data) => {
+				.send((err) => {
 					if (err) {
 						console.log('Error: ', err);
 					} else {
@@ -118,7 +140,7 @@ class Amazon {
 							resolve();
 						}
 					}
-			  });
+				});
 	}
 
 	//=================
@@ -127,7 +149,7 @@ class Amazon {
 	async loadAllObjects({ marker: marker, prefix: prefix }) {
 		let objects = await this.listObjects({ marker: marker, prefix: prefix });
 
-		if (objects.length == listLimit) {
+		if (objects.length === listLimit) {
 				let marker = objects[objects.length - 1].Key;
 				objects = objects.concat(await this.loadAllObjects({ marker: marker, prefix: prefix }));
 		}
@@ -150,21 +172,20 @@ class Amazon {
 
 	//===================
 	// Thumbnail methods
+
 	findMissingThumbnails() {
-		let missingThumbnails = [];
 		_.forEach(this.bucketFiles, (item) => {
-			let thumbnail = _.find(this.thumbnails, (thumbnail) => {
-					return thumbnail.Key.replace(thumbBucket, '') === item.Key;
+			let thumbnail = _.find(this.thumbnails, (thumb) => {
+					return thumb.Key.replace(thumbBucket, '') === item.Key;
 				}
 			);
 			if (!thumbnail) {
-				missingThumbnails.push(item.Key);
+				this.missingThumbnails.push(item.Key);
 			}
 		});
-		return missingThumbnails;
 	}
 }
 
 
 
-module.exports = Amazon
+module.exports = Amazon;

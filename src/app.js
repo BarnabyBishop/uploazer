@@ -1,4 +1,4 @@
-const babel = require("babel/register")({ experimental: true });
+require('babel/register')({ experimental: true });
 const Amazon = require('./amazon');
 
 // const amazon = new Amazon('barney-photos', 'Honeymoon');
@@ -11,4 +11,5 @@ amazon.checkThumbnails();
 Does 'completed' work?
 New folder?
 thumbnails
+https://github.com/fluent-ffmpeg/node-fluent-ffmpeg
 */
