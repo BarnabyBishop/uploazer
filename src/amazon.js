@@ -24,7 +24,6 @@ class Amazon {
 
 		this.missingFiles = [];
 		this.missingThumbnails = [];
-
 	}
 
 	async checkThumbnails() {
@@ -33,19 +32,19 @@ class Amazon {
 		// Load all objects + thumbnails in current bucket.
 		this.bucketFiles = await this.loadAllObjects({});
 		// Find what files need to be uploaded
-		const missingFilesCount = this.findMissingFiles();
-		console.log(`${missingFilesCount} missing files.`);
+		this.missingFiles = this.findMissingFiles(this.bucketFiles);
+		console.log(`${this.missingFiles.length} missing files.`);
 
-		if (missingFilesCount > 0) {
+		if (this.missingFiles.length > 0) {
 			await this.uploadMissingFiles();
-		}
 
+		}
 		this.thumbnails = await this.loadAllObjects({ prefix: thumbBucket + this.prefix });
 		console.log(`Loaded ${this.bucketFiles.length} items and ${this.thumbnails.length} thumbnails.`);
 
 
 		// Find what thumbnails need to be uploaded
-		this.findMissingThumbnails();
+		this.missingThumbnails = this.findMissingFiles(this.thumbails);
 		console.log(`${this.missingThumbnails.length} missing thumbnails.`);
 
 		this.uploadMissingThumbnails();
@@ -55,13 +54,13 @@ class Amazon {
 	// File methods
 
 	getFileList(dir = '') {
-		let fullPath = this.filePath + dir;
+		let filePath = this.filePath + dir;
 		let fullBucketPath = this.prefix + '/' + dir;
-		let files = fs.readdirSync(fullPath);
+		let files = fs.readdirSync(filePath);
 		for (let i = 0; i < files.length; i++) {
-			let stats = fs.statSync(fullPath + files[i]);
+			let stats = fs.statSync(filePath + files[i]);
 			if (stats.isFile()) {
-				this.files.push({ path: fullPath, name: files[i], bucketAlias: fullBucketPath });
+				this.files.push({ fullPath: filePath + files[i], path: filePath, name: files[i], bucketAlias: fullBucketPath });
 			}
 			else if (stats.isDirectory()) {
 				this.getFileList(`${dir}${files[i]}/`);
@@ -69,23 +68,22 @@ class Amazon {
 		}
 	}
 
-	findMissingFiles() {
-		this.missingFiles = [];
+	findMissingFiles(bucketFiles) {
+		let missingFiles = [];
 		for (let file of this.files) {
-			if (!_.findWhere(this.bucketFiles, { Key: file.bucketAlias + file.name })) {
-				this.missingFiles.push(file);
+			if (!_.findWhere(bucketFiles, { Key: file.bucketAlias + file.name })) {
+				missingFiles.push(file);
 			}
 		}
-		return this.missingFiles.length;
+		return missingFiles;
 	}
 
 	async uploadMissingFiles() {
 		let paramList = [];
 		for (let file of this.missingFiles) {
 			let filename = file.name;
-			let filePath = file.path + filename;
-			let fileBuffer = fs.readFileSync(filePath);
-			paramList.push({Bucket: this.bucket, Key: file.bucketAlias + filename, ContentType: mime.lookup(filePath), Body: fileBuffer });
+			let fileBuffer = fs.readFileSync(file.fullPath);
+			paramList.push({Bucket: this.bucket, Key: file.bucketAlias + filename, ContentType: mime.lookup(file.fullPath), Body: fileBuffer });
 		}
 		return new Promise((resolve) => {
 			this.putObject(paramList, resolve);
@@ -95,22 +93,19 @@ class Amazon {
 	uploadMissingThumbnails() {
 		let paramList = [];
 		for (let file of this.missingThumbnails) {
-			let filePath = this.getFilePath(file.Key);
+			let filename = file.name;
+			console.log(file.fullPath);
 			let fileStream =
-				gm(filePath)
+				gm(file.fullPath)
 					.resize(null, 50)
 					.autoOrient()
 					.stream();
 
-			paramList.push({Bucket: this.bucket, Key: file.Key, ContentType: 'image/jpg', Body: fileStream });
+			paramList.push({Bucket: this.bucket, Key: file.bucketAlias  + filename, ContentType: mime.lookup(file.fullPath), Body: fileStream });
 		}
 		return new Promise((resolve) => {
 			this.putObject(paramList, resolve);
 		});
-	}
-
-	getFilePath(fileKey) {
-		return fileKey;
 	}
 
 	putObject(paramList, resolve) {
