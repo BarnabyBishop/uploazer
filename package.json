@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "del": "^1.1.1",
+    "gm": "^1.17.0",
     "gulp": "^3.8.11",
     "gulp-babel": "^4.0.0",
     "gulp-jshint": "^1.9.4",

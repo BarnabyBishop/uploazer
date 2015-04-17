@@ -9,9 +9,13 @@ const Amazon = require('./amazon');
 //                           'BB Android Phone 2',
 //                           'C:\\Users\\B\\Pictures\\BB Android Phone 2\\');
 
+// const amazon = new Amazon('barney-photos',
+//                           'test',
+//                           'C:\\Users\\B\\Pictures\\test\\');
+
 const amazon = new Amazon('barney-photos',
-                          'test',
-                          'C:\\Users\\B\\Pictures\\test\\');
+                           'test',
+                           '/home/barnaby/Pictures/');
 
 amazon.checkThumbnails();
 

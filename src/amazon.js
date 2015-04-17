@@ -27,27 +27,34 @@ class Amazon {
 	}
 
 	async checkThumbnails() {
-		// Load a list of filenames from the current directory.
-		this.getFileList();
-		// Load all objects + thumbnails in current bucket.
-		this.bucketFiles = await this.loadAllObjects({});
-		// Find what files need to be uploaded
-		this.missingFiles = this.findMissingFiles(this.bucketFiles);
-		console.log(`${this.missingFiles.length} missing files.`);
+		try {
+			// Load a list of filenames from the current directory.
+			this.getFileList();
+			// Load all objects + thumbnails in current bucket.
+			console.log('loading s3 objects...!');
+			this.bucketFiles = await this.loadAllObjects({});
+			// Find what files need to be uploaded
+			this.missingFiles = this.findMissingFiles(this.bucketFiles);
+			console.log(`${this.missingFiles.length} missing files.`);
 
-		if (this.missingFiles.length > 0) {
-			await this.uploadMissingFiles();
+			if (this.missingFiles.length > 0) {
+				await this.uploadMissingFiles();
+			}
 
+			this.thumbnails = await this.loadAllObjects({ prefix: thumbBucket + this.prefix });
+			console.log(`Loaded ${this.bucketFiles.length} items and ${this.thumbnails.length} thumbnails.`);
+
+
+			// Find what thumbnails need to be uploaded
+			this.missingThumbnails = this.findMissingFiles(this.thumbails);
+			console.log(`${this.missingThumbnails.length} missing thumbnails.`);
+
+			this.uploadMissingThumbnails();
 		}
-		this.thumbnails = await this.loadAllObjects({ prefix: thumbBucket + this.prefix });
-		console.log(`Loaded ${this.bucketFiles.length} items and ${this.thumbnails.length} thumbnails.`);
+		catch (ex) {
+			console.log(ex);
+		}
 
-
-		// Find what thumbnails need to be uploaded
-		this.missingThumbnails = this.findMissingFiles(this.thumbails);
-		console.log(`${this.missingThumbnails.length} missing thumbnails.`);
-
-		this.uploadMissingThumbnails();
 	}
 
 	//=================
@@ -95,13 +102,17 @@ class Amazon {
 		for (let file of this.missingThumbnails) {
 			let filename = file.name;
 			console.log(file.fullPath);
-			let fileStream =
-				gm(file.fullPath)
-					.resize(null, 50)
-					.autoOrient()
-					.stream();
-
-			paramList.push({Bucket: this.bucket, Key: file.bucketAlias  + filename, ContentType: mime.lookup(file.fullPath), Body: fileStream });
+			gm(file.fullPath)
+				.resize(null, 50)
+				.autoOrient()
+				.toBuffer((err, buffer) => {
+					if (err) {
+						console.log(err);
+					}
+					else {
+						paramList.push({Bucket: this.bucket, Key: file.bucketAlias + filename, ContentType: mime.lookup(file.fullPath), Body: buffer });
+					}
+				});
 		}
 		return new Promise((resolve) => {
 			this.putObject(paramList, resolve);
