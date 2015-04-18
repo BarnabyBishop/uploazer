@@ -5,17 +5,17 @@ const Amazon = require('./amazon');
 // const amazon = new Amazon('barney-photos',
 //                           'Mils Galaxy Note',
 //                           'C:\\Users\\B\\Pictures\\Mils Galaxy Note\\');
-// const amazon = new Amazon('barney-photos',
-//                           'BB Android Phone 2',
-//                           'C:\\Users\\B\\Pictures\\BB Android Phone 2\\');
+const amazon = new Amazon('barney-photos',
+                          'BB Android Phone 2',
+                          'C:\\Users\\B\\Pictures\\BB Android Phone 2\\');
 
 // const amazon = new Amazon('barney-photos',
 //                           'test',
 //                           'C:\\Users\\B\\Pictures\\test\\');
 
-const amazon = new Amazon('barney-photos',
-                           'test',
-                           '/home/barnaby/Pictures/');
+// const amazon = new Amazon('barney-photos',
+//                            'test',
+//                            '/home/barnaby/Pictures/');
 
 amazon.checkThumbnails();
 

@@ -9,6 +9,7 @@ var gm = require('gm');
 
 const listLimit = 1000;
 const thumbBucket = 'Thumbnails/';
+const thumbHeight = 600;
 
 Promise.promisifyAll(s3);
 
@@ -31,25 +32,27 @@ class Amazon {
 			// Load a list of filenames from the current directory.
 			this.getFileList();
 			// Load all objects + thumbnails in current bucket.
-			console.log('loading s3 objects...!');
+			console.log('Loading files from S3...');
 			this.bucketFiles = await this.loadAllObjects({});
+			console.log(`Loaded ${this.bucketFiles.length} items.`);
+
 			// Find what files need to be uploaded
 			this.missingFiles = this.findMissingFiles(this.bucketFiles);
 			console.log(`${this.missingFiles.length} missing files.`);
 
 			if (this.missingFiles.length > 0) {
-				await this.uploadMissingFiles();
+				await this.uploadFiles(this.missingFiles, (file, params, fileList, resolve) => this.getFile(file, params, fileList, resolve));
 			}
 
 			this.thumbnails = await this.loadAllObjects({ prefix: thumbBucket + this.prefix });
-			console.log(`Loaded ${this.bucketFiles.length} items and ${this.thumbnails.length} thumbnails.`);
+			console.log(`Found ${this.thumbnails.length} thumbnails.`);
 
 
 			// Find what thumbnails need to be uploaded
-			this.missingThumbnails = this.findMissingFiles(this.thumbails);
+			this.missingThumbnails = this.findMissingFiles(this.thumbnails, thumbBucket);
 			console.log(`${this.missingThumbnails.length} missing thumbnails.`);
 
-			this.uploadMissingThumbnails();
+			this.uploadFiles(this.missingThumbnails, (file, params, fileList, resolve) => this.getThumbnail(file, params, fileList, resolve));
 		}
 		catch (ex) {
 			console.log(ex);
@@ -75,55 +78,63 @@ class Amazon {
 		}
 	}
 
-	findMissingFiles(bucketFiles) {
+	findMissingFiles(bucketFiles, prefix) {
+		prefix = prefix || '';
 		let missingFiles = [];
 		for (let file of this.files) {
-			if (!_.findWhere(bucketFiles, { Key: file.bucketAlias + file.name })) {
-				missingFiles.push(file);
+			if (!_.findWhere(bucketFiles, { Key: prefix + file.bucketAlias + file.name })) {
+				let missingFile = _.clone(file);
+				if (prefix) {
+					missingFile.bucketAlias = prefix + file.bucketAlias;
+				}
+				missingFiles.push(missingFile);
 			}
 		}
 		return missingFiles;
 	}
 
-	async uploadMissingFiles() {
-		let paramList = [];
-		for (let file of this.missingFiles) {
-			let filename = file.name;
-			let fileBuffer = fs.readFileSync(file.fullPath);
-			paramList.push({Bucket: this.bucket, Key: file.bucketAlias + filename, ContentType: mime.lookup(file.fullPath), Body: fileBuffer });
-		}
+	async uploadFiles(fileList, getBody) {
 		return new Promise((resolve) => {
-			this.putObject(paramList, resolve);
+			this.uploadNextFile(fileList, getBody, resolve);
 		});
 	}
 
-	uploadMissingThumbnails() {
-		let paramList = [];
-		for (let file of this.missingThumbnails) {
-			let filename = file.name;
-			console.log(file.fullPath);
-			gm(file.fullPath)
-				.resize(null, 50)
-				.autoOrient()
-				.toBuffer((err, buffer) => {
-					if (err) {
-						console.log(err);
-					}
-					else {
-						paramList.push({Bucket: this.bucket, Key: file.bucketAlias + filename, ContentType: mime.lookup(file.fullPath), Body: buffer });
-					}
-				});
-		}
-		return new Promise((resolve) => {
-			this.putObject(paramList, resolve);
+	getFile(file, params, fileList, resolve) {
+		fs.readFile(file.fullPath, (err, buffer) => {
+			if (err) {
+				throw err;
+			}
+			params.Body = buffer;
+			this.putObject(params, fileList, (_file, _params, _fileList, _resolve) => this.getFile(_file, _params, _fileList, _resolve), resolve);
 		});
+
 	}
 
-	putObject(paramList, resolve) {
-		let params = paramList[0];
+	getThumbnail(file, params, fileList, resolve) {
+		gm(file.fullPath)
+			.resize(null, thumbHeight)
+			.autoOrient()
+			.toBuffer((err, buffer) => {
+				if (err) {
+					throw err;
+				}
+
+				params.Body = buffer;
+				this.putObject(params, fileList, (_file, _params, _fileList, _resolve) => this.getThumbnail(_file, _params, _fileList, _resolve), resolve);
+			});
+	}
+
+	uploadNextFile(fileList, getBody, resolve) {
+		let file = fileList[0];
+		let filename = file.name;
+		let params = {Bucket: this.bucket, Key: file.bucketAlias + filename, ContentType: mime.lookup(file.fullPath) };
+		getBody(file, params, fileList, resolve);
+	}
+
+	putObject(params, fileList, getBody, resolve) {
 		let uploadProgress = 0;
-		let bar = new ProgressBar(':bar:percent', { total: 100, width: 20 });
 		console.log(`Uploading ${params.Key}`);
+		let bar = new ProgressBar('[:bar] :percent :etas ', { total: 100, width: 20, incomplete: ' ' });
 		return s3.putObject(params)
 				.on('httpUploadProgress', function (progress) {
 					let percentage = parseInt(progress.loaded / progress.total * 100);
@@ -138,8 +149,8 @@ class Amazon {
 					} else {
 						console.log(`Finished! ♪~ ᕕ(ᐛ)ᕗ`);
 						console.log('');
-						if (paramList.length > 1) {
-							this.putObject(paramList.slice(1), resolve);
+						if (fileList.length > 1) {
+							this.uploadNextFile(fileList.slice(1), getBody, resolve);
 						}
 						else {
 							console.log('All file uploaded. ヾ(⌐■_■)ノ♪');
