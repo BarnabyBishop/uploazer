@@ -18,10 +18,3 @@ const amazon = new Amazon('barney-photos',
 //                            '/home/barnaby/Pictures/');
 
 amazon.checkThumbnails();
-
-/*
-Does 'completed' work?
-New folder?
-thumbnails
-https://github.com/fluent-ffmpeg/node-fluent-ffmpeg
-*/
