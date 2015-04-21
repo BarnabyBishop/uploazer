@@ -1,0 +1,895 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"thumb",
+				"thumbBucket〔variable〕"
+			],
+			[
+				"missing",
+				"missingThumbnails"
+			],
+			[
+				"bucket",
+				"bucketFiles"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"border",
+				"border-radius"
+			],
+			[
+				"text-",
+				"text-align"
+			],
+			[
+				"1px",
+				"10px"
+			],
+			[
+				"inline",
+				"inline-block"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 400.0,
+		"last_filter": "list",
+		"selected_items":
+		[
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"log",
+				"Git: Log Current File"
+			],
+			[
+				"status",
+				"Git: Status"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"diff",
+				"Git: Diff Current File"
+			],
+			[
+				"mini",
+				"Pretty JSON: Minify (compress) JSON"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"push",
+				"Git: Push"
+			],
+			[
+				"comm",
+				"Git: Commit"
+			],
+			[
+				"add",
+				"Git: Add..."
+			],
+			[
+				"com",
+				"Git: Commit"
+			],
+			[
+				"statu",
+				"Git: Status"
+			],
+			[
+				"PUS",
+				"Git: Push"
+			],
+			[
+				"diff c",
+				"Git: Diff Current File"
+			],
+			[
+				"stau",
+				"Git: Status"
+			],
+			[
+				"pretty",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"remo",
+				"Git: Remote"
+			],
+			[
+				"Package Control: n",
+				"Package Control: Install Package"
+			],
+			[
+				"sta",
+				"Git: Status"
+			],
+			[
+				"git push",
+				"Git: Push"
+			],
+			[
+				"stat",
+				"Git: Status"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"git: push",
+				"Git: Push"
+			],
+			[
+				"gist",
+				"Git: Status"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 533.0
+	},
+	"console":
+	{
+		"height": 308.0,
+		"history":
+		[
+			"import urllib.request,os; pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')",
+			"view.run_command('timestamp')",
+			"view.run_command('barney')",
+			"view.run_command('InsertDateTime')",
+			"view.run_command('insertdatetime')",
+			"view.run_command('example')",
+			"view.run_command('insertdatetime')",
+			"view.run_command('example')",
+			"view.run_command('insertdatetime')",
+			"view.run_command('insertdatetimte')",
+			"view.run_command('example')",
+			"view.run_command('test')",
+			"view.run_command('User.text')",
+			"view.run_command('text')",
+			"view.run_command('insertdatetime')",
+			"view.run_command('InsertDatetime')",
+			"view.run_command('insertdatetime')",
+			"view.runCommand('insertdatetime')",
+			"view.runCommand(\"inssertdatetime\")",
+			"view.runCommand(\"inssertdatetime')",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/B/Projects/uploazer",
+		"/C/Users/B/Projects/uploazer/src",
+		"/C/Users/B/Projects/uploazer/src/mime"
+	],
+	"file_history":
+	[
+		"/C/Users/B/Projects/uploazer/src/app.js",
+		"/C/Users/B/Projects/uploazer/src/amazon.js",
+		"/C/Users/B/Projects/uploazer/src/thumbnail.js",
+		"/C/Users/B/Projects/uploazer/src/mime/videos.json",
+		"/C/Users/B/Projects/uploazer/src/mime/images.json",
+		"/C/Users/B/Projects/uploazer/src/mime/types.json",
+		"/C/Users/B/Projects/home/src/handlebars/helpers.coffee",
+		"/C/Users/B/Projects/home/src/handlebars/widgets.coffee",
+		"/C/Users/B/Projects/home/package.json",
+		"/C/Users/B/Projects/home/Gruntfile.coffee",
+		"/C/Users/B/Projects/home/buildTasks/default.coffee",
+		"/C/Users/B/Projects/home/bower.json",
+		"/C/Users/B/Projects/home/config/environments/development.coffee",
+		"/C/Users/B/Projects/home/buildTasks/grunt-requirejs.coffee",
+		"/C/Users/B/Pictures/test/aaaaa.txt",
+		"/C/Users/B/Pictures/BB Android Phone 2/New Text Document.txt",
+		"/C/Users/B/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/B/Projects/uploazer/gulpfile.js",
+		"/C/Users/B/Projects/uploazer/src/image.js",
+		"/C/Users/B/.aws/credentials",
+		"/C/Users/B/Projects/uploazer/src/original.js",
+		"/C/Users/B/Projects/uploazer/dist/app.js",
+		"/C/Users/B/Projects/uploazer/server.js",
+		"/C/Users/B/Projects/uploazer/package.json",
+		"/C/Users/B/Projects/noteable/gulpfile.js",
+		"/C/Users/B/Projects/uploazer/.gitignore",
+		"/C/Users/B/Projects/uploazer/node_modules/gulp-nodemon/index.js",
+		"/C/Users/B/Projects/uploazer/README.md",
+		"/C/Users/B/Projects/noteable/build/bundle.js",
+		"/C/Users/B/Projects/noteable/package.json",
+		"/C/Users/B/Projects/noteable/app.coffee",
+		"/C/Users/B/Projects/noteable/public/scripts/app.js",
+		"/C/Users/B/Projects/noteable/bundle.js",
+		"/C/Users/B/Projects/noteable/gulpfile.coffee",
+		"/C/Users/B/Projects/noteable/views/app.html",
+		"/C/Users/B/Projects/noteable/public/scripts/stores/ToDoStore.js",
+		"/C/Users/B/Projects/noteable/public/scripts/constants/TodoConstants.js",
+		"/C/Users/B/Projects/noteable/gruntfile.coffee",
+		"/C/Users/B/Projects/noteable/node_modules/babelify/node_modules/babel-core/lib/babel/transformation/transformers/es6/properties.computed.js",
+		"/C/Users/B/Projects/noteable/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/constants.js",
+		"/C/Users/B/Projects/noteable/node_modules/grunt/node_modules/js-yaml/node_modules/argparse/examples/constants.js",
+		"/C/Users/B/Projects/noteable/node_modules/babelify/node_modules/lodash/utility/constant.js",
+		"/C/Users/B/Projects/noteable/node_modules/browserify/node_modules/constants-browserify/constants.json",
+		"/C/Users/B/Projects/noteable/node_modules/browserify/test/constants.js",
+		"/C/Users/B/Projects/noteable/node_modules/coffee-script/CONTRIBUTING.md",
+		"/C/Users/B/Projects/noteable/node_modules/grunt-express-server/test/custom_output_test.js",
+		"/C/Users/B/Projects/noteable/coffeelint.json",
+		"/C/Users/B/Projects/noteable/node_modules/express-sessions/node_modules/express/node_modules/connect/lib/middleware/session/store.js",
+		"/C/Users/B/Projects/noteable/node_modules/grunt/node_modules/js-yaml/node_modules/argparse/lib/action/store.js",
+		"/C/Users/B/Projects/noteable/node_modules/express-session/session/store.js",
+		"/C/Users/B/Projects/noteable/node_modules/browserify/node_modules/JSONStream/test/stringify_object.js",
+		"/C/Users/B/Projects/noteable/node_modules/grunt-express-server/test/stoppable_test.js",
+		"/C/Users/B/Projects/noteable/public/styles/style.styl",
+		"/C/Users/B/Projects/noteable/node_modules/react/lib/getUnboundedScrollPosition.js",
+		"/C/Users/B/Projects/noteable/public/scripts/components/TodoApp.react.js",
+		"/C/Users/B/Projects/noteable/public/scripts/dispatcher/AppDispatcher.js",
+		"/C/Users/B/Projects/noteable/public/scripts/dispatcher/Dispactcher.js",
+		"/C/Users/B/Projects/noteable/routes/routes.coffee",
+		"/C/Users/B/Projects/noteable/routes/users.js",
+		"/C/Users/B/Projects/noteable/public/scripts/index.coffee",
+		"/C/Users/B/Projects/noteable/public/scripts/index.js",
+		"/C/Users/B/Projects/noteable/app/app.coffee",
+		"/C/Users/B/Projects/noteable/.git/.gitignore",
+		"/C/Users/B/Projects/noteabl_e/.gitignore",
+		"/C/Users/B/Projects/noteable/.git/Node.gitignore",
+		"/C/Users/B/Projects/noteable/bin/www",
+		"/C/Users/B/Projects/noteable/public/scripts/dispatcher/Dispatcher.js",
+		"/C/Users/B/Dropbox/pw.txt",
+		"/C/Users/B/Projects/noteable/_og_gruntfile.js",
+		"/C/Users/B/Projects/noteable/views/index.html",
+		"/C/Users/B/Projects/noteable/views/listitem.html",
+		"/C/Users/B/Projects/noteable/views/list.html",
+		"/C/Users/B/Projects/noteable/test.js",
+		"/C/Users/B/Projects/noteable/views/layout.html",
+		"/C/Users/B/Projects/noteable/node_modules/coffeelint/src/htmldoc.coffee",
+		"/C/Users/B/Projects/noteable/node_modules/nunjucks/tests/templates/async.html",
+		"/C/Users/B/Projects/noteable/node_modules/grunt/node_modules/js-yaml/node_modules/argparse/node_modules/underscore/index.html",
+		"/C/Users/B/Projects/noteable/node_modules/grunt/node_modules/hooker/test/hooker_test.js",
+		"/C/Users/B/Projects/noteable/node_modules/body-parser/HISTORY.md",
+		"/C/Users/B/Projects/noteable/routes/e652c5bd-b77b-458a-8b4b-4daa651d5dde.dmp",
+		"/C/Users/B/Projects/noteable/models/model.coffee",
+		"/C/Users/B/Projects/noteable/models/user.coffee",
+		"/C/Users/B/Projects/noteable/models/note.coffee",
+		"/C/Users/B/Dropbox/Banana Park/Catalogue/Ebay/Details.txt",
+		"/C/Users/B/Downloads/ionicons-1.5.2/ionicons-1.5.2/css/ionicons.css",
+		"/C/Users/B/Projects/noteable/node_modules/coffeelint/node_modules/glob/node_modules/inherits/inherits.js",
+		"/C/Users/B/Projects/noteable/public/scripts/templates.js",
+		"/C/Users/B/Projects/noteable/node_modules/connect-mongo/node_modules/mongodb/lib/mongodb/admin.js",
+		"/C/Users/B/Projects/noteable/node_modules/grunt-nodemon/node_modules/nodemon/lib/rules/add.js",
+		"/C/Users/B/Projects/noteable/views/index.jade",
+		"/C/Users/B/Projects/noteable/noteable.sublime-project",
+		"/C/Users/B/Projects/noteable/views/error.html",
+		"/C/Users/B/Projects/noteable/views/login.html",
+		"/C/Users/B/Projects/noteable/views/layout.jade",
+		"/C/Users/B/Projects/noteable/views/error.jade",
+		"/C/Users/B/Projects/noteable/node_modules/coffeelint/src/error_report.coffee",
+		"/C/Users/B/Projects/noteable/test.txt",
+		"/C/Users/B/Dropbox/Banana Park/Catalogue/Ebay/Other products/otherproducts.html",
+		"/C/Users/B/Dropbox/Banana Park/Catalogue/Ebay/baby towels/html.txt",
+		"/C/Users/B/Downloads/ionicons-1.5.2/ionicons-1.5.2/cheatsheet - compact.html",
+		"/C/Users/B/Projects/noteable/node_modules/coffee-script/node_modules/mkdirp/test/umask_sync.js",
+		"/C/Users/B/Projects/noteable/node_modules/.bin/jade",
+		"/C/Users/B/Projects/noteable/node_modules/debug/.jshintrc",
+		"/C/Users/B/Projects/noteable/node_modules/bcrypt/.npmignore",
+		"/C/Users/B/Projects/noteable/models/folder.coffee",
+		"/C/Users/B/Projects/noteable/views/login.jade",
+		"/C/Users/B/Projects/noteable/node_modules/stylus/lib/nodes/query-list.js",
+		"/C/Users/B/Projects/noteable/node_modules/grunt-node-inspector/node_modules/node-inspector/front-end/LiveEditSupport.js",
+		"/C/Users/B/Projects/noteable/node_modules/bcrypt/LICENSE",
+		"/C/Users/B/Projects/noteable/node_modules/mongoose/node_modules/mpromise/test/promises.Aplus.js",
+		"/C/Users/B/Projects/noteable/public/styles/style.css",
+		"/C/Users/B/Projects/noteable/node_modules/grunt-node-inspector/node_modules/node-inspector/front-end/auditsPanel.css",
+		"/C/Users/B/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/B/Projects/noteable/node_modules/grunt-contrib-stylus/node_modules/nib/node_modules/.bin/stylus",
+		"/C/Users/B/Projects/noteable/node_modules/grunt-contrib-stylus/node_modules/.bin/stylus.cmd",
+		"/C/Users/B/Projects/noteable/node_modules/grunt-contrib-stylus/node_modules/.bin/stylus",
+		"/C/Users/B/Projects/noteable/node_modules/.bin/stylus.cmd",
+		"/C/Users/B/Projects/noteable/node_modules/.bin/stylus",
+		"/C/Users/B/Projects/noteable/node_modules/bcrypt/test/sync.js",
+		"/C/Users/B/Projects/noteable/node_modules/grunt-node-inspector/node_modules/node-inspector/front-end/buildSystemOnly.js",
+		"/C/Users/B/Projects/noteable/todo",
+		"/C/Users/B/Desktop/test.json",
+		"/C/Users/B/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/B/Projects/noteable/node_modules/mongoose/node_modules/mongodb/lib/mongodb/auth/mongodb_x509.js",
+		"/C/Users/B/Projects/noteable/node_modules/stylus/node_modules/sax/test/xmlns-xml-default-ns.js",
+		"/C/Users/B/Projects/noteable/node_modules/stylus/node_modules/sax/test/xmlns-strict.js",
+		"/C/Users/B/Projects/noteable/node_modules/coffeelint/node_modules/optimist/example/short.js",
+		"/C/Users/B/Projects/noteable/node_modules/stylus/bin/stylus"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			".indexOf(",
+			"findMissingFiles",
+			"file, params, fileList, resolve",
+			"file",
+			"getFile",
+			"self",
+			"getFile",
+			"self",
+			"this",
+			"missingFiles",
+			"filePath",
+			"fullPath",
+			"uploadMissingFiles",
+			"Mils Galaxy Note",
+			"findMissingFiles",
+			"thumbBucket",
+			"then",
+			"filename",
+			"fileName",
+			"filename",
+			"fileName",
+			"this.missingFiles",
+			"this.files",
+			"this.missingFiles",
+			"this.files",
+			"missingFiles",
+			"this.content",
+			"\\",
+			"console",
+			"findMissingThumbnails",
+			"objects",
+			"$",
+			"const",
+			"this",
+			"null",
+			"contents",
+			"BB",
+			"amazon",
+			"');",
+			"console",
+			"{",
+			"cp",
+			"\"",
+			"let",
+			"var",
+			"//",
+			"uglyify",
+			"module.exports",
+			"module.exports = Dispatcher;",
+			"app_js",
+			",",
+			"/",
+			"js",
+			"src",
+			"Edit",
+			".pipe",
+			"return ",
+			"express",
+			"(",
+			"renderList",
+			":",
+			"notelist",
+			"addNoteToList",
+			"node",
+			"val",
+			";",
+			"\"",
+			"logger",
+			"$",
+			"clearInputs",
+			"log",
+			"log3",
+			".on",
+			"renderList",
+			"clear",
+			"renderList",
+			"startList",
+			"renderList",
+			"value",
+			"control",
+			"Item",
+			"editListField",
+			"checkbox",
+			"listclose",
+			"listmov",
+			"editListField",
+			"input",
+			"notes[noteId].",
+			"consol",
+			"list",
+			"move",
+			"deleteItem",
+			"div",
+			"items",
+			"list",
+			"item",
+			":",
+			"clear",
+			"cleareempty",
+			"clear",
+			"editTimer",
+			"makelist",
+			"this",
+			"}",
+			"{",
+			"',",
+			"/>",
+			"'",
+			"]",
+			"(",
+			"8",
+			"9",
+			"%",
+			"%}",
+			"{%",
+			"h1",
+			",",
+			".ion",
+			".icon.ion",
+			"<span class=\"step size-12\">",
+			"size-12",
+			"folders",
+			"fa",
+			":",
+			"container",
+			"forEach",
+			"setValue",
+			":"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			".icon.ion",
+			"",
+			"/images",
+			"<br />",
+			"",
+			"</a><br />",
+			">Downloada</a>",
+			".mp3\" download></a>",
+			"<a href=\"http",
+			"http",
+			"a"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.coffeecompile_output":
+	{
+		"height": 98.0
+	},
+	"output.exec":
+	{
+		"height": 98.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 98.0
+	},
+	"output.git-commit":
+	{
+		"height": 92.0
+	},
+	"output.git-push":
+	{
+		"height": 92.0
+	},
+	"output.sftp":
+	{
+		"height": 92.0
+	},
+	"pinned_build_system": "",
+	"project": "uploazer.sublime-project",
+	"replace":
+	{
+		"height": 72.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"gruntreq",
+				"buildTasks\\grunt-requirejs.coffee"
+			],
+			[
+				"bower",
+				"bower.json"
+			],
+			[
+				"devel",
+				"config\\environments\\development.coffee"
+			],
+			[
+				"default",
+				"buildTasks\\default.coffee"
+			],
+			[
+				"grunt",
+				"Gruntfile.coffee"
+			],
+			[
+				"package",
+				"package.json"
+			],
+			[
+				"widgets",
+				"src\\handlebars\\widgets.coffee"
+			],
+			[
+				"helpers",
+				"src\\handlebars\\helpers.coffee"
+			],
+			[
+				"ama",
+				"src\\amazon.js"
+			],
+			[
+				"gulpf",
+				"gulpfile.js"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"pac",
+				"package.json"
+			],
+			[
+				"app",
+				"app.coffee"
+			],
+			[
+				"app.js",
+				"public\\scripts\\app.js"
+			],
+			[
+				"gulpfil",
+				"gulpfile.js"
+			],
+			[
+				"gulp",
+				"gulpfile.js"
+			],
+			[
+				"app.html",
+				"views\\app.html"
+			],
+			[
+				"app.c",
+				"app.coffee"
+			],
+			[
+				"constan",
+				"public\\scripts\\constants\\TodoConstants.js"
+			],
+			[
+				"stor",
+				"public\\scripts\\stores\\ToDoStore.js"
+			],
+			[
+				"app.co",
+				"app.coffee"
+			],
+			[
+				"route",
+				"routes\\routes.coffee"
+			],
+			[
+				"list",
+				"views\\list.html"
+			],
+			[
+				"indexhtml",
+				"views\\index.html"
+			],
+			[
+				"styl",
+				"public\\styles\\style.styl"
+			],
+			[
+				"user",
+				"models\\user.coffee"
+			],
+			[
+				"sty",
+				"public\\styles\\style.styl"
+			],
+			[
+				"rout",
+				"routes\\routes.coffee"
+			],
+			[
+				"index",
+				"public\\scripts\\index.coffee"
+			],
+			[
+				"not",
+				"models\\note.coffee"
+			],
+			[
+				"note",
+				"models\\note.coffee"
+			],
+			[
+				"layout",
+				"views\\layout.html"
+			],
+			[
+				"index.c",
+				"public\\scripts\\index.coffee"
+			],
+			[
+				"inht",
+				"views\\index.html"
+			],
+			[
+				"layou",
+				"views\\layout.html"
+			],
+			[
+				"error",
+				"views\\error.jade"
+			],
+			[
+				"model",
+				"models\\model.coffee"
+			],
+			[
+				".jade",
+				"views\\index.jade"
+			],
+			[
+				"app.coffe",
+				"app.coffee"
+			],
+			[
+				"log",
+				"views\\login.jade"
+			],
+			[
+				"folder",
+				"models\\folder.coffee"
+			],
+			[
+				"mod",
+				"models\\model.coffee"
+			],
+			[
+				"ind",
+				"views\\index.jade"
+			],
+			[
+				"style",
+				"public\\styles\\style.styl"
+			],
+			[
+				".sty",
+				"public\\styles\\style.styl"
+			],
+			[
+				"inde",
+				"views\\index.jade"
+			],
+			[
+				"layo",
+				"views\\layout.jade"
+			],
+			[
+				"la",
+				"views\\layout.jade"
+			],
+			[
+				"index.",
+				"views\\index.jade"
+			],
+			[
+				"lay",
+				"views\\layout.jade"
+			],
+			[
+				"login",
+				"views\\login.jade"
+			],
+			[
+				"mo",
+				"models\\model.coffee"
+			],
+			[
+				"defaul",
+				"templates\\views\\layouts\\default.hbs"
+			],
+			[
+				"def",
+				"templates\\views\\layouts\\default.hbs"
+			],
+			[
+				"hawcss",
+				"public\\styles\\hawkettconstructions.css"
+			],
+			[
+				".hbs",
+				"templates\\views\\index.hbs"
+			],
+			[
+				"galler",
+				"templates\\views\\gallery.hbs"
+			],
+			[
+				"hawkcss",
+				"public\\styles\\hawkettconstructions.css"
+			],
+			[
+				"midd",
+				"routes\\middleware.js"
+			],
+			[
+				"middle",
+				"routes\\middleware.js"
+			],
+			[
+				"hawkett",
+				"public\\styles\\hawkettconstructions.css"
+			],
+			[
+				"enquir",
+				"models\\Enquiry.js"
+			],
+			[
+				"hawk",
+				"public\\styles\\hawkettconstructions.css"
+			],
+			[
+				"in",
+				"index_old.html"
+			],
+			[
+				"pa",
+				"Package Control Messages"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\Users\\B\\Projects\\hawkett\\hawkett.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 276.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

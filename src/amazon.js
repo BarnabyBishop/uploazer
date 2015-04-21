@@ -47,6 +47,8 @@ class Amazon {
 				await this.uploadFiles(this.missingFiles, (file, params, fileList, resolve) => this.getFile(file, params, fileList, resolve));
 			}
 
+			return;
+
 			this.thumbnails = await this.loadAllObjects({ prefix: thumbBucket + this.prefix });
 			console.log(`Found ${this.thumbnails.length} thumbnails.`);
 
@@ -163,6 +165,7 @@ class Amazon {
 					} else {
 						console.log(`Finished! ♪~ ᕕ(ᐛ)ᕗ`);
 						console.log('');
+						thumbnail.finishedWithThumbnail(fileList[0].fullPath);
 						if (fileList.length > 1) {
 							this.uploadNextFile(fileList.slice(1), getBody, resolve);
 						}
