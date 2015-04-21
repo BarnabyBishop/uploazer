@@ -5,11 +5,14 @@ const s3 = new AWS.S3();
 const Promise = require('bluebird');
 const ProgressBar = require('progress');
 const mime = require('mime');
-var gm = require('gm');
+//const gm = require('gm');
+const thumbnail = require('./thumbnail');
+
 
 const listLimit = 1000;
 const thumbBucket = 'Thumbnails/';
 const thumbHeight = 600;
+const thumbTime = '00:00:01';
 
 Promise.promisifyAll(s3);
 
@@ -111,17 +114,28 @@ class Amazon {
 	}
 
 	getThumbnail(file, params, fileList, resolve) {
-		gm(file.fullPath)
-			.resize(null, thumbHeight)
-			.autoOrient()
-			.toBuffer((err, buffer) => {
-				if (err) {
-					throw err;
-				}
-
+		thumbnail.get(file.fullPath, thumbHeight, thumbTime, (buffer) => {
+			if (buffer) {
 				params.Body = buffer;
 				this.putObject(params, fileList, (_file, _params, _fileList, _resolve) => this.getThumbnail(_file, _params, _fileList, _resolve), resolve);
-			});
+			}
+			else {
+				// If the currentl file can't be thumbnailed skip to the next file
+				this.uploadNextFile(fileList, (_file, _params, _fileList, _resolve) => this.getThumbnail(_file, _params, _fileList, _resolve), resolve);
+			}
+		});
+
+		// gm(file.fullPath)
+		// 	.resize(null, thumbHeight)
+		// 	.autoOrient()
+		// 	.toBuffer((err, buffer) => {
+		// 		if (err) {
+		// 			throw err;
+		// 		}
+
+		// 		params.Body = buffer;
+		// 		this.putObject(params, fileList, (_file, _params, _fileList, _resolve) => this.getThumbnail(_file, _params, _fileList, _resolve), resolve);
+		// 	});
 	}
 
 	uploadNextFile(fileList, getBody, resolve) {

@@ -12,6 +12,8 @@ const videoTypes = [
     'video/mp4'
 ];
 
+let tempFiles = {};
+
 let thumbnail = module.exports = {
     get: function(filePath, size, time, callback) {
         const mimeType = mime.lookup(filePath);
@@ -40,13 +42,24 @@ let thumbnail = module.exports = {
     },
 
     getVideoThumbnail: function(filePath, size, time, callback) {
-        exec('ffmpeg -ss ' + time + ' -vframes 1 -i ' + filePath + ' -y -s ' + size.height + ' -f image2 tmp/thumb1.jpg', () => {
-            fs.readFile('tmp/thumb1.jpg', (err, buffer) => {
+        let file = filePath.substring(filePath.lastIndexOf('/') + 1, file.path.length);
+        let tempFile = `temp/${file}.jpg`;
+        exec(`ffmpeg -ss ${time} -vframes 1 -i ${filePath} -y -s ${size.height} -f image2 ${tempFile}`, () => {
+            fs.readFile(tempFile, (err, buffer) => {
                 if (err) {
                     throw err;
                 }
+                tempFile[filePath] = tempFile;
                 callback(buffer);
             });
         });
+    },
+
+    finishedWithThumbnail: function(filePath) {
+        if (tempFiles[filePath]) {
+            fs.unlink(tempFiles[filePath], () => {
+                delete tempFiles[filePath];
+            });
+        }
     }
 };
