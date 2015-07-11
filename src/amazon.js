@@ -116,7 +116,7 @@ class Amazon {
 	}
 
 	getThumbnail(file, params, fileList, resolve) {
-		thumbnail.get(file.fullPath, thumbHeight, thumbTime, (buffer) => {
+		thumbnail.get(file.fullPath, { height: thumbHeight }, thumbTime, (buffer) => {
 			if (buffer) {
 				params.Body = buffer;
 				this.putObject(params, fileList, (_file, _params, _fileList, _resolve) => this.getThumbnail(_file, _params, _fileList, _resolve), resolve);

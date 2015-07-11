@@ -23,6 +23,7 @@ let thumbnail = module.exports = {
     },
 
     getImageThumbnail: function(filePath, size, callback) {
+        console.log(filePath, size.height);
         gm(filePath)
             .resize(null, size.height)
             .autoOrient()
@@ -30,7 +31,6 @@ let thumbnail = module.exports = {
                 if (err) {
                     throw err;
                 }
-
                 callback(buffer);
             });
     },
